@@ -5,20 +5,26 @@ import com.algaworks.algafood.di.notificacao.Notificador;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class AtivacaoClienteService {
-    private Notificador notificador;
+    private final Notificador notificador;
 
-    @Autowired(required = false)
+    @Autowired
+
     public AtivacaoClienteService(Notificador notificador) {
         this.notificador = notificador;
-
-        System.out.println("AtivacaoClienteService: " + notificador);
     }
+
+    @Autowired(required = false)
+//    public AtivacaoClienteService(Notificador notificador) {
+//        this.notificador = notificador;
+//
+//        System.out.println("AtivacaoClienteService: " + notificador);
+//    }
 
     public void ativar(Cliente cliente) {
         cliente.ativar();
-        if(notificador != null)
+        if (notificador != null)
             notificador.notificar(cliente, "Seu cadastro no sistema está ativo!");
         else
-            System.out.println("Não existe notificador, mas cliente fio ativado");
+            System.out.println("Não existe notificador, mas cliente foi ativado");
     }
 }

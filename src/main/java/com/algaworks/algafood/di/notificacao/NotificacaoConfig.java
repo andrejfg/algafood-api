@@ -1,15 +1,13 @@
 package com.algaworks.algafood.di.notificacao;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class NotificacaoConfig {
 
     @Bean // é necessário remover @component da classe original
-    @Qualifier("normal")
+    @TipoDoNotificador(NivelUrgencia.NORMAL)
     public NotificadorEmail notificadorEmail() {
         NotificadorEmail notificador = new NotificadorEmail("smtp.algamail.com.br");
         notificador.setCaixaAlta(true);
@@ -18,7 +16,7 @@ public class NotificacaoConfig {
     }
 
     @Bean // é necessário remover @component da classe original
-    @Qualifier("urgente")
+    @TipoDoNotificador(NivelUrgencia.URGENTE)
     public NotificadorSMS notificadorSMS() {
         NotificadorSMS notificador = new NotificadorSMS();
         notificador.setCaixaAlta(true);

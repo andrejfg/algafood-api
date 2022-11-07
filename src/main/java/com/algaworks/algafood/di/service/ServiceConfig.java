@@ -1,14 +1,15 @@
 package com.algaworks.algafood.di.service;
 
+import com.algaworks.algafood.di.notificacao.NivelUrgencia;
 import com.algaworks.algafood.di.notificacao.Notificador;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.algaworks.algafood.di.notificacao.TipoDoNotificador;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ServiceConfig {
     @Bean
-    public AtivacaoClienteService ativacaoClienteService(@Qualifier("urgente") Notificador notificador){
+    public AtivacaoClienteService ativacaoClienteService(@TipoDoNotificador(NivelUrgencia.NORMAL) Notificador notificador){
         return new AtivacaoClienteService(notificador);
     }
 }
